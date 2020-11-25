@@ -1,0 +1,10 @@
+.popUp {
+  left: calc(50% - 200px);
+  width: 400px;
+  height: 400px;
+  z-index: 1200;
+  top: 50px;
+}
+.popUp__bg {
+  opacity: 0.9;
+}

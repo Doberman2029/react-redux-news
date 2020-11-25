@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import Header from "./components/Header";
+import Main from "./components/Main";
+import News from "./components/News";
+import PopUp from "./components/PopUp";
+import NewsPublisher from "./components/NewsPublisher";
+import NewsCreator from "./components/NewsCreator";
 
 function App() {
+  const [popUp, setPopUp] = useState(false);
+
+  const popUpHandler = () => {
+    setPopUp((prev) => !prev);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header popUpHandler={popUpHandler} />
+      <Switch>
+        <Route exact path="/">
+          <Main />
+        </Route>
+        <Route exact path="/news">
+          <News />
+        </Route>
+        <Route exact path="/publish">
+          <NewsPublisher />
+        </Route>
+        <Route exact path="/create">
+          <NewsCreator />
+        </Route>
+      </Switch>
+      <PopUp isOpen={popUp} handler={popUpHandler} />
+    </Router>
   );
 }
 
